@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="row">
+    <div class="d-flex align-items-center gap-2 mb-2 mt-4 border-bottom border-3 border-dark pb-3">
+      {% include 'layouts/card_quastion.html' %}
+    </div>
+  </div>
+  <div class="row">
+    {% for answer in answers %}
+      {% include 'layouts/card_answer.html' with item=answer %}
+    {% endfor %}
+    {% include 'layouts/pagination.html' with page_obj=answers %}
+  </div>
+  <div class="container border-top border-3 border-dark">
+    <form method="post" action="">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <button class="btn btn-success">Answer</button>
+    </form>
+  </div>
+  {% include 'layouts/pagination.html' %}
+{% endblock %}

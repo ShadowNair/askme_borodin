@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="d-flex gap-3 align-items-center">
+    <h2>Tag: {{ tag }}</h2>
+  </div>
+    {% for quastion in quastions %}
+      {% include 'layouts/card_quastion.html' with item=quastion %}
+    {% endfor %}
+    {% include 'layouts/pagination.html' with page_obj=quastions %}
+{% endblock %}

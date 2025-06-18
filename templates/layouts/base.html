@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+
+    <title>Home</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">404Answer</a>
+        <div class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Title" aria-label="Search" name="q" required/>
+          <a class="btn btn-outline-success" type="submit" href="{% url 'ask' %}">Ask!</a>
+        </div>
+        {% if request.user.is_authenticated %}
+          <div class="d-flex align-items-center">
+            <div class="me-3">
+            <img src='{{ request.user.profile.avatar.url }}' class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Profile photo" />
+            </div>
+            <div>
+              <div>{{ request.user.username }}</div>
+              <div class="">
+                <a href="{% url 'settings' %}">Settings</a>
+                <a href="{% url 'logout' %}">Log Out</a>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="d-flex">
+            <div>
+              <div class="">
+                <a href="{% url 'login' %}">Log In</a>
+                <a href="{% url 'register' %}">Register</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </nav>
+    <main class="container mt-2">
+      <div class="row">
+        <section class="col vh-100">
+          {% block content %}
+
+          {% endblock %}
+        </section>
+        
+        {% if request.user.is_authenticated %}
+        <aside class="col-3 vh-100">
+          <section class="mb-3">
+            <h3>Popular Tags</h3>
+            {% for quastion in quastions %}
+              {% for tag in quastion.tags.all %}
+                <a class="badge rounded-pill bg-success" href='{% url "tag" tag.name%}' style="text-decoration: none;">{{ tag.name}}</a>
+              {% endfor %}
+            {% endfor %}
+          </section>
+          <section>
+            <h3>Best Members</h3>
+            <a class="d-block" href="#">Empty</a>
+            <a class="d-block" href="#">Empty</a>
+            <a class="d-block" href="#">Empty</a>
+            <a class="d-block" href="#">Empty</a>
+            <a class="d-block" href="#">Empty</a>
+          </section>
+        </aside>
+        
+        {% endif %}
+          
+      </div>
+    </main>
+
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  </body>
+</html>

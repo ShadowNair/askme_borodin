@@ -1,0 +1,92 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="d-flex align-items-center gap-2 mb-4">
+    <h1>Registration</h1>
+</div>
+<form method="post" enctype="multipart/form-data"> 
+    {% csrf_token %}  
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="row align-items-center mb-3">
+        <div class="col-3">
+            <label for="{{ form.username.id_for_label }}" class="form-label mb-0">Login</label>
+        </div>
+        <div class="col-6">
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.username.errors.as_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row align-items-center mb-3">
+        <div class="col-3">
+            <label for="{{ form.email.id_for_label }}" class="form-label mb-0">Email</label>
+        </div>
+        <div class="col-6">
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.email.errors.as_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row align-items-center mb-3">
+        <div class="col-3">
+            <label for="{{ form.password.id_for_label }}" class="form-label mb-0">Password</label>
+        </div>
+        <div class="col-6">
+            {{ form.password }}
+            {% if form.password.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.password.errors.as_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row align-items-center mb-3">
+        <div class="col-3">
+            <label for="{{ form.repeat_password.id_for_label }}" class="form-label mb-0">Repeat password</label>
+        </div>
+        <div class="col-6">
+            {{ form.repeat_password }}
+            {% if form.repeat_password.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.repeat_password.errors.as_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row align-items-center mb-3">
+        <div class="col-3">
+            <label for="{{ form.avatar.id_for_label }}" class="form-label mb-0">Upload avatar</label>
+        </div>
+        <div class="col-6">
+            {{ form.avatar }}
+            {% if form.avatar.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ form.avatar.errors.as_text }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row align-items-center mb-3">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-info">Register</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+

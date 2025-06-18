@@ -1,0 +1,38 @@
+{% load static %}
+
+<article class="d-flex gap-2 flex-column mb-4 border border-3 border-dark rounded-3" >
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <div style="height: 100px;" class="border mb-2 w-100">
+            <img src="{{ item.author.avatar.url }}" alt="img" class="img-thumbnail" />
+          </div>
+          <div>
+            <div class="input-group flex-nowrap" >
+              <button type="submit" class="btn btn-dark question-like-button" style="width: 100%">{{ item.rating }}</button>
+            </div>
+          </div>
+        </div>
+        <div class="col d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title"><a href='{% url "single_quastion" item.id %}'>{{ item.title }}</a></h5>
+            <p class="card-text">{{ item.text }}</p>
+          </div>
+          <div class="row">
+            <div class="col">
+              <a href="{% url 'single_quastion' item.id %}" style="text-decoration: none;">Answers:({{ item.answers_count }})</a>
+            </div>
+            <div class="col">
+              <span>Tags:</span>
+
+              {% for tag in item.tags.all %}
+                <a class="badge rounded-pill bg-success" href="{% url 'tag' tag.name%}" style="text-decoration: none;">{{ tag.name }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

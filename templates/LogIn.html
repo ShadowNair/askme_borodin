@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+  <div class="row">
+    <section class="col d-flex flex-column align-items-center">
+      <div class="d-flex align-items-center gap-2 mb-4 mt-4">
+        <h2>Log In</h2>
+      </div>
+      <form action="" method="post">
+        {% csrf_token %}
+        {% if errors %}
+					<span style="color: red"> {{ errors }}</span>
+				{% endif %}
+        <div class="mb-3">
+          <label for="username" class="form-label" >NickName</label>
+          <input type="text" class="form-control w-auto" id="username" name="username" placeholder="Shadow_Nair" maxlength="50"/>
+        </div>
+          <label for="password" class="form-label">Password</label>
+          <input  type='password' class="form-control w-auto" id="password" name="password" placeholder="Password" />
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Log In!</button>
+        </div>
+        <a href="{% url 'register' %}">create new accaunt</a>
+      </form>
+    </section>
+  </div>
+
+  <script src="js/bootstrap.bundle.js"></script>
+{% endblock %}

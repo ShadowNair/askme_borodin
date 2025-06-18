@@ -1,0 +1,17 @@
+{% extends "./layouts/base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+		<div class="col-8">
+			 <div class="d-flex gap-3 align-items-center">
+        <h2>Settings</h2>
+	</div>
+			<form method="post" action="" enctype="multipart/form-data">
+				{% csrf_token %}
+				{% bootstrap_form form %}
+				<button class="btn btn-info">Save</button>
+			</form>
+		</div>
+{% endblock %}
